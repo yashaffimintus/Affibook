@@ -1,0 +1,33 @@
+
+
+<table border= "1" style="width:50%">
+  <tr>
+     <th>Title</th>
+ </tr>
+ <% @user.posts.each do |post| %>
+  <tr>
+  <td><%= post.title %></td>
+  </tr>
+  <%end%>
+</table>
+
+<%= link_to 'Back',  users_myuser_path %>
+ <h2>FOllowed</h2>
+<!-- <ul>
+  <% for relationship in @user.relationships %>
+    <li>
+      <%=h relationship.followed.username %>
+      (<%= link_to "remove", relationship, :method => :delete %>)
+    </li>
+  <% end %>
+</ul>
+
+<p><%= link_to "Find follower", users_path %></p>
+
+<h2>Followed by Users</h2>
+<ul>
+  <% for user in @user.inverse_followers %>
+    <li><%=h user.username %></li>
+  <% end %>
+</ul> -->
+

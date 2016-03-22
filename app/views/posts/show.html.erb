@@ -1,0 +1,38 @@
+<body style="background-color:#E69B31;">
+<h1 style="color:blue;">User Post</h1>
+<table border= "1" style="width:70%">
+  <tr>
+    <th>Title</th>   
+  </tr>
+   <tr>
+      <td><%= @post.title %></td>
+</tr>
+</table>
+
+  <table border= "1" style="width:70%">
+  <tr>
+    <th>All Comments</th>   
+    <th>Delete Comments</th>   
+  </tr
+  <% @post.comments.each do |comment| %>
+   <tr>
+      <td><%= comment.body %></td>
+      <td><%= link_to 'Delete', [comment.post, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %></td>
+   </tr>
+   <% end %>
+</table>
+<h4>Add a comment:</h4>
+<%= form_for([@post, @post.comments.build]) do |f| %>
+  
+  <div class="field">
+    <%= f.label :body%><br />
+    <%= f.text_field :body  %>
+  </div>
+   <div class="actions">
+    <%= f.submit "Comment" %>
+  </div>
+<% end %>
+<%= link_to 'Back', posts_path,class: "btn btn-primary btn-xs" %>
+</body>

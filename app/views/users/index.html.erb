@@ -1,0 +1,21 @@
+<body style="background-color:#E69B31;">
+<h1 style="color:blue;">User Profile</h1>
+<table border= "1" style="width:70%">
+  <tr>
+    <th>FirstName</th>
+     <th>LastName</th>
+      <th>Email</th>   
+  </tr>
+   <tr>
+      <td><%= current_user.first_name %></td>
+      <td><%= current_user.last_name %></td>
+      <td><%=current_user.email %></td>
+    
+  </tr>
+</table>
+<%= link_to "Add More Details", new_profile_path %>
+
+<%#= link_to "Show Details",redirect_to @profile %>
+
+<%#= link_to "Back", users_myprofile_path %>
+</body>

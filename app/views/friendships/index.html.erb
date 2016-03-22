@@ -1,0 +1,19 @@
+<h1>Followed User</h1>
+<%= link_to "Remove", friendships_path, :method => :destroy,class: "btn btn-primary btn-xs" %>
+
+<table border= "1" style="width:50%">
+  <tr>
+     <th>Friend ID</th>
+     <th>Accept</th>
+     <th>Reject</th>
+ </tr>
+ 
+  <tr>
+  <td><%= link_to "Accept"%></td>
+  <td><%= link_to "Reject"%></td>
+  
+  </tr>
+  
+</table>
+
+<%= link_to 'Back',  users_myuser_path,class: "btn btn-primary btn-xs" %>

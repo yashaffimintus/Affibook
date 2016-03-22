@@ -1,0 +1,25 @@
+<body style="background-color:#B3B0AF;">
+<h1>Listing of Users</h1>
+ 
+<table border= "1" style="width:50%">
+  <tr>
+    <th>FirstName</th>
+     <th>LastName</th>
+     <th>Follow</th>
+     <th>Friend Request</th>
+</tr>
+ 
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
+      <td><%= link_to "Follow",relationships_path(:followed_id => user.id ), :method => :post, class: "btn btn-primary btn-xs" %></td>
+      <td><%= link_to "Send Request",friendships_path(:friend_id => user.id ), :method => :post, class: "btn btn-primary btn-xs" %></td>
+    </tr>
+  <% end %>
+</table>
+</body>
+<%= link_to 'Back', root_url,class: "btn btn-primary btn-xs" %>
+       
+
+<%#= f.select :, ['Follow', 'Unfollow']%>

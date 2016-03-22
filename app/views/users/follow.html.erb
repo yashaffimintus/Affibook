@@ -1,0 +1,12 @@
+<h1>Hello</h1>
+<table border= "1" style="width:50%">
+  <tr>
+     <th>Title</th>
+ </tr>
+ <% @posts.each do |post| %>
+  <tr>
+  <td><%= post.title %></td>
+  </tr>
+  <%end%>
+</table>
+<%= link_to 'Back',  users_myuser_path %>
