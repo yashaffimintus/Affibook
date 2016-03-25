@@ -58,3 +58,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'shoulda-context'
 end
+
+group :production do
+  gem 'pg'
+end
