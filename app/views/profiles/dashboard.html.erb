@@ -1,13 +1,21 @@
+<div class="well" style="color:blue;" >
 <h2 style="color:blue;" align="center">Welcome To Dashboard:(Home Page)</h2>
-<body style="background-color:#FBCBCB;">
+</div>
 <h2 style="color:red;">Welcome <%= current_user.first_name %></h2> 
-<ul class = list-inline>
-<%= link_to "My Profile",user_profiles_path(:user_id => current_user.id), class: "btn btn-primary btn-lg pull-right"  %>
-<button type="button" onclick="window.location='/users/myuser'"class="btn btn-success btn-lg pull-right">All User List</button>
-<button type="button" onclick="window.location='/likes'"class="btn btn-primary btn-lg pull-right">My Friend List</button>
-<button type="button" onclick="window.location='/posts'"class="btn btn-warning btn-lg pull-right">All Posts</button>
-<button type="button" onclick="window.location='/posts/new'"class="btn btn-info btn-lg pull-right">Create New Posts</button>
+
+<body style="background-color:#FBCBCB;">
+<div class="well">
+<ul class = "list-inline" >
+<li><%= link_to "My Profile",user_profiles_path(:user_id => current_user.id), class: "btn btn-primary btn-lg pull-right"  %></li>
+<li><button type="button" onclick="window.location='/users/myuser'"class="btn btn-success btn-lg pull-right">All User List</button></li>
+<li><button type="button" onclick="window.location=' /relationships'"class="btn btn-danger btn-lg pull-right">Followed</button></li>
+<li><button type="button" onclick="window.location='/likes'"class="btn btn-primary btn-lg pull-right">Friend List</button></li>
+<li><button type="button" onclick="window.location='/posts'"class="btn btn-warning btn-lg pull-right">All Posts</button></li>
+<li><button type="button" onclick="window.location='/posts/new'"class="btn btn-info btn-lg pull-right">New Posts</button></li>
+<div class="well">
+<%= image_tag(current_user.avatar.url, :size => "300x250",:hspace => "400",:style => 'border-right: 2px solid #000;')%>
+</div>
 </body>
 </ul>
-<%= image_tag(current_user.avatar.url, :size => "500x300",:hspace => "300",:style => 'border-right: 2px solid #000;')%>
+</div>
 

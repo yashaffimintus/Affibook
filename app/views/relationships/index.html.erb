@@ -5,17 +5,15 @@
      <th>FirstName</th>
      <th>LastName</th>
      <th>Post</th>
-     <!-- <th>Comment</th> -->
  </tr>
  <% @relationships.each do |hel| %>
   <tr>
   <td><%= User.find(hel.followed_id).first_name %></td>
   <td><%= User.find(hel.followed_id).last_name %></td>
   <td><%= Post.find(hel.followed_id).title %></td>
-  <td><%#= Comment.find(hel.followed_id).body %></td>
   </tr>
   <%end%>
 </table>
-<%= link_to 'Back',  users_myuser_path,class: "btn btn-primary btn-xs" %>
+<%= link_to 'Back',  root_path,class: "btn btn-primary btn-xs" %>
 
      
