@@ -1,15 +1,15 @@
 <div class="well" style="color:blue;" >
-<h2 style="color:blue;" align="center">Welcome To Dashboard:(Home Page)</h2>
+<marquee direction="right" bgcolor = "#F5C09E"><h2 style="color:blue;" align="center">Welcome To Dashboard:(Home Page)</h2></marquee>
 </div>
-<h2 style="color:red;">Welcome <%= current_user.first_name %></h2> 
+<marquee bgcolor = "#00FFFF"><h2 style="color:red;">Welcome <%= current_user.first_name %></h2></marquee> 
 
 <body style="background-color:#FBCBCB;">
-<div class="well">
+<div class="well" bgcolor = "#F5C09E" >
 <ul class = "list-inline" >
 <li><%= link_to "My Profile",user_profiles_path(:user_id => current_user.id), class: "btn btn-primary btn-lg pull-right"  %></li>
 <li><button type="button" onclick="window.location='/users/myuser'"class="btn btn-success btn-lg pull-right">All User List</button></li>
 <li><button type="button" onclick="window.location=' /relationships'"class="btn btn-danger btn-lg pull-right">Followed</button></li>
-<li><button type="button" onclick="window.location='/likes'"class="btn btn-primary btn-lg pull-right">Friend List</button></li>
+<li><button type="button" onclick="window.location='/friendships'"class="btn btn-primary btn-lg pull-right">Friend List</button></li>
 <li><button type="button" onclick="window.location='/posts'"class="btn btn-warning btn-lg pull-right">All Posts</button></li>
 <li><button type="button" onclick="window.location='/posts/new'"class="btn btn-info btn-lg pull-right">New Posts</button></li>
 <div class="well">
@@ -18,4 +18,5 @@
 </body>
 </ul>
 </div>
+
 

@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   end 
    
   def show
-    @profile = Profile.find_by(params[:id]) 
+    @profile = current_user.profile
   end
 
   def dashboard

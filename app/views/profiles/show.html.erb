@@ -13,20 +13,22 @@
         <td><%= current_user.email %></td>
         
     </tr>
-  </table>
-  
-  <table border= "1" style="width:70%">
-      <tr>
-        <th>Address</th>
-        <th>Gender</th>
-        <th>Status</th>
-          <th>DOB</th>   
-      </tr>
-       <tr>
-          <td><%= @profile.address %></td>
-          <td><%= @profile.gender %></td>
-          <td><%= @profile.status %></td>
-          <td><%= @profile.dob %></td>
-      </tr>
-  </table>
+    </table>
+    <table border= "1" style="width:70%">
+        <tr>
+          <th>Address</th>
+          <th>Gender</th>
+          <th>Status</th>
+            <th>DOB</th>   
+        </tr>
+         <tr>
+            <td><%= @profile.address %></td>
+            <td><%= @profile.gender %></td>
+            <td><%= @profile.status %></td>
+            <td><%= @profile.dob %></td>
+        </tr>
+    </table>
   <%= link_to "Back", user_profiles_path(:user_id => current_user.id),class: "btn btn-primary btn-xs" %>
+  
+  
+  

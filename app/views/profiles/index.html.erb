@@ -3,7 +3,7 @@
 <body style="background-color:#E69B31;">
 <h2 style="color:blue;">User Profile</h2>
 <h3 style="color:red;">Welcome <%= current_user.first_name %></h3>
-<%= image_tag(current_user.avatar.url,:size => "260x180",:hspace => "300",:style => 'border-right: 2px solid #000;')%>
+<%= image_tag(current_user.avatar.url,:size => "260x180",:hspace => "300",:style => 'border-radius: 20px solid #000;',:class=>"img-circle")%>
 <table border= "1" style="width:70%">
   <tr>
     <th>FirstName</th>
