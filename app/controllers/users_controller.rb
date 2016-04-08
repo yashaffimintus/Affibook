@@ -5,19 +5,7 @@ class UsersController < ApplicationController
     @users = User.all.where("id!=?", current_user.id)  
   end
 
-  def show
-  end
   
-  def index
-  end
-  def dashboard
-    
-  end
-  def myprofile 
-  end
-  def new 
-    @user = User.new 
-  end
   # def follow 
   #   byebug
    

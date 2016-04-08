@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323133231) do
+ActiveRecord::Schema.define(version: 20160331094040) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -84,6 +84,10 @@ ActiveRecord::Schema.define(version: 20160323133231) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
   create_table "users", force: :cascade do |t|
     t.integer  "role"
     t.string   "first_name"
@@ -100,6 +104,7 @@ ActiveRecord::Schema.define(version: 20160323133231) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

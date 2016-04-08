@@ -51,6 +51,11 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    carrierwave (0.10.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -276,6 +281,7 @@ DEPENDENCIES
   byebug
   cancan
   capybara
+  carrierwave
   coffee-rails (~> 4.1.0)
   devise
   factory_girl_rails
@@ -287,6 +293,7 @@ DEPENDENCIES
   less-rails
   paperclip
   pg
+  pry
   rails (= 4.2.5.1)
   rails_12factor
   role_model

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { registrations: "users/registrations" }
   root 'profiles#dashboard'
+   get 'profiles/account'
+  
   #get 'users/new'
   get 'users/myuser'
   get 'posts/index'
@@ -8,23 +10,27 @@ Rails.application.routes.draw do
   get "users/user_id/profiles/id" => "profiles#show"
   post 'users/new'
   get 'profiles/new'
+  get  '/users/user_id/profiles/id'
   #get 'users/dashboard'
    #get 'profiles/dashboard'
    get 'users/follow'
    get 'users/user_id/profiles'
    #get "relationships/follow"
-   get "relationships/id"
+   #get "relationships/id"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
   resources :users do
-  resources :profiles
-end
+    resources :profiles
+  end
   
   resources :friendships
+  
   resources :posts do
     resources :comments
   end
-   resources :relationships
+   
+  resources :relationships
+  resources :likes
   # You can have the root of your site routed with "root"
   
   get "profiles/:id" => "users#show"

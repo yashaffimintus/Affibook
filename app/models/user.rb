@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   has_many :posts,dependent:   :destroy
   has_many :comments
-  has_one :profile
-                            
+  has_one :profile, dependent: :destroy
+  mount_uploader :avatar, AvatarUploader                          
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -16,15 +16,15 @@ class User < ActiveRecord::Base
   #   active_relationships.create(followed_id: other_user.id)
   # end
   
-  has_many :relationships
+  has_many :relationships,dependent: :destroy
   has_many :followed, :through => :relationships
   has_many :inverse_relationships, :class_name => "Relationship", :foreign_key => "followed_id"
-  has_many :inverse_followed, :through => :inverse_relationships, :source => :user
+  has_many :inverse_relationships, :through => :inverse_relationships, :source => :user
   # # Unfollows a user.
   # def unfollow(other_user)
   #   active_relationships.find_by(followed_id: other_user.id).destroy
   # end
-  has_many :friendships
+  has_many :friendships,dependent: :destroy
   has_many :friends, :through => :friendships
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   # def following?(other_user)
   #   following.include?(other_user)
   # end
-  
+  has_many :likes,dependent: :destroy
 
 end
 

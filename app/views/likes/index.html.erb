@@ -5,15 +5,13 @@
       <th>ID</th>
      <th>FirstName</th>
      <th>LastName</th>
-     <th>Unlike</th>
   </tr>
 
- <% @likeables.each do |hel| %>
+ <% @likes.each do |hel| %>
   <tr>
   <td><%= hel.post_id %></td>
-  <td><%= User.find(hel.post_id).first_name %></td>
-  <td><%= User.find(hel.post_id).last_name %></td>
-  <td><%= link_to "unlike",hel,method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-primary btn-xs" %></td>
+  <td><%= User.find(hel.user_id).first_name %></td>
+  <td><%= User.find(hel.user_id).last_name %></td>
   <%end%>
 </table>
 

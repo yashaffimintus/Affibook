@@ -1,27 +1,21 @@
-<h1>Followed User</h1>
-<%= link_to "unfollow", relationships_path, :method => :destroy,class: "btn btn-primary btn-xs" %>
 
+<h1>Followed User</h1>
 <table border= "1" style="width:50%">
   <tr>
      <th>FirstName</th>
      <th>LastName</th>
+     <th>Post</th>
+     <!-- <th>Comment</th> -->
  </tr>
- <% @users.each do |hel| %>
+ <% @relationships.each do |hel| %>
   <tr>
-  <td><%= hel.first_name %></td>
-  <td><%= hel.last_name %></td>
+  <td><%= User.find(hel.followed_id).first_name %></td>
+  <td><%= User.find(hel.followed_id).last_name %></td>
+  <td><%= Post.find(hel.followed_id).title %></td>
+  <td><%#= Comment.find(hel.followed_id).body %></td>
   </tr>
-<%end%>
-  <tr>
-     <th>ID</th>
-     <th>Title</th>
- </tr>
- <% @posts.each do |val| %>
-  <tr>
-  <td><%= val.id%></td>
-  <td><%= val.title %></td>
-  </tr>
-<%end%>
+  <%end%>
 </table>
-
 <%= link_to 'Back',  users_myuser_path,class: "btn btn-primary btn-xs" %>
+
+     

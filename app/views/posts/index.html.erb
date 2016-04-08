@@ -5,7 +5,7 @@
     <th>Title</th>
     <th>Comment</th>
     <th>Edit</th>
-    <th>Destroy</th>
+    <th>Like/Unlike</th>
   </tr>
  
   <% @posts.each do |post| %>
@@ -13,9 +13,13 @@
       <td><%= post.title %></td>
       <td><%= link_to 'Comment', post_path(post) %></td>
       <td><%= link_to 'Edit', edit_post_path(post)  %></td>
-       <td><%= link_to 'Destroy', post_path(post),
-              method: :delete,
-              data: { confirm: 'Are you sure you want to delete a post ?' }  %></td>
+      <% @pos = current_user.likes.map(&:post_id) %>
+      <% if @pos.include?post.id %>
+          <td><%= link_to 'UnLike',like_path(post),method: :delete,data: { confirm: 'Are you sure you want to delete a post ?' } %></td>
+      <% else %>
+          <td><%= link_to 'Like',likes_path(:post_id => post.id),method: :post %></td>
+        <% end %>
+
     </tr>
   <% end %>
 </table>

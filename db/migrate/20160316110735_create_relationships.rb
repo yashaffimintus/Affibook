@@ -6,8 +6,9 @@ class CreateRelationships < ActiveRecord::Migration
       t.integer :user_id
       t.timestamps null: false
     end
-    
-
+    add_index :relationships, :follower_id
+    add_index :relationships, :followed_id
+    add_index :relationships, [:follower_id, :followed_id], unique: true
   end
 end
       

@@ -5,21 +5,98 @@
   <tr>
     <th>FirstName</th>
      <th>LastName</th>
-     <th>Follow</th>
+     <th>Follow/Unfollow</th>
      <th>Friend Request</th>
 </tr>
  
   <% @users.each do |user| %>
     <tr>
-      <td><%= user.first_name %></td>
-      <td><%= user.last_name %></td>
-      <td><%= link_to "Follow",relationships_path(:followed_id => user.id ), :method => :post, class: "btn btn-primary btn-xs" %></td>
-      <td><%= link_to "Send Request",friendships_path(:friend_id => user.id ), :method => :post, class: "btn btn-primary btn-xs" %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <% @foll=current_user.relationships.map(&:followed_id) %>
+        <% if @foll.include?user.id %>
+          <div id="container">
+          <td><%= button_to "unfollow",relationship_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary btn-xs",:id => "hide",:class => "delete" %><div id="hide"></div></td>
+        <% else %>
+          <td><%= button_to "Follow",relationships_path(:followed_id => user.id), method: :post, class: "btn btn-primary btn-xs",:id => "show"%></td>
+        <%end%>
+        </div>
+        
+        <% @frnd=current_user.friendships.map(&:friend_id) %>
+        <% if @frnd.include?user.id %>
+          <td><%= button_to "unfriend",friendship_path(user), method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-primary btn-xs",remote: true %></td> 
+        <% else %> 
+          <td><%= button_to "Friend",friendships_path(:friend_id => user.id ), method: :post, class: "btn btn-primary btn-xs",remote: true %></td>
+        <% end %>
+
     </tr>
   <% end %>
 </table>
 </body>
 <%= link_to 'Back', root_url,class: "btn btn-primary btn-xs" %>
-       
 
-<%#= f.select :, ['Follow', 'Unfollow']%>
+
+
+<script>
+// alert("hello")
+// function change() 
+// {
+//     if (this.value=="unfollow") this.value = "follow";
+    
+// }
+
+
+// // </script>
+
+
+<!-- $(document).ready(function(){
+   $('.hell').click(function(){
+    if($(this).id()=='hide'){
+        $(this).id('show');
+     }
+     else if($(this).id =='show'){
+        $(this).id('hide');
+     }
+   });
+}); -->
+
+ <script>
+//   alert("hello1")
+//   function Hello() {
+//   var xhttp = new XMLHttpRequest();
+//   xhttp.onreadystatechange = function() {
+//     if (xhttp.readyState == 4 && xhttp.status == 200) {
+//         document.getElementById("hide").innerHTML = xhttp.responseText;
+//     }
+//   };
+//   xhttp.open("DELETE","http://localhost:3000/relationships/id", true);
+//   xhttp.send();
+// }
+
+$(document).ready(function(){
+
+ $(".delete").click(function(event){
+     alert("Delete?");
+     var href = $(this).attr(id)
+     var btn = this;
+
+      $.ajax({
+        type: "DELETE",
+        url:href,
+        success: function(response) {
+
+          if (response == "Success")
+          {
+            $(btn).closest('tr').fadeOut("slow");
+          }
+          else
+          {
+            alert("Error");
+          }
+
+        }
+      });
+     event.preventDefault();
+  })
+});
+</script>

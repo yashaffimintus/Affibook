@@ -1,20 +1,25 @@
 <h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<body style="background-color:#BCA9F5;" >
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name),html: { multipart: true }) do |f| %>
   <%= devise_error_messages! %>
   
   <div class="field">
     <%= f.label :first_name %><br />
-    <%= f.text_field :first_name  %>
-  </div>
+    <%= f.text_field :first_name,:style =>"height:40px;width:200px;",:id => "my", :type => "string", :min => "4",:maxlength => "20",:autofocus => true,:placeholder=> "Enter Firstname", :required => true, :value => "" %>
+  </div><div id="demo"></div>
+  
   <div class="field">
     <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, :style =>"height:40px;width:200px;",:id => "my1",:placeholder=> "Enter Lastname", :min => "4",:max => "20",:autofocus => true, :required => true, :value => "" %>
+  </div><div id="demo1"></div>
+  <div class="field">
+    <label>My Avatar</label><br />
+    <%= image_tag(@user.avatar_url) if @user.avatar? %>
+    <%= f.label :avatar do %>
+    <%= f.file_field :avatar,:id => "my3",:require => true %>
+    <%= f.hidden_field :avatar_cache %>
+    <% end %>
   </div>
-  <!-- <div class="field">
-    <%= f.label :picture %><br />
-    <%= f.file_field :picture %>
-  </div> -->
   <div class="field">
     <%= f.label :role %><br />
     <%= f.select :role, collection: User.roles.keys.to_a %>
@@ -22,24 +27,135 @@
   
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    <%= f.email_field :email,:style =>"height:40px;width:200px;",:id => "my2", :min => "4",:max => "10",:autofocus => true, :required => true,:value => "" %>
+  </div><div id="demo2"></div>
   <div class="field">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off",:style =>"height:40px;width:200px;",:id => "my4", :require => true %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation,:placeholder=> "Re-enter Password", autocomplete: "off",:style =>"height:40px;width:200px;",:id => "my5", :require => true %>
   </div>
   
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up",:onclick => "myFunction()"%>
   </div>
 <% end %>
-
+</body>
 <%= render "users/shared/links" %>
+
+
+
+<script>
+function myFunction() {
+    alert("hello")
+    
+    var txt = "";
+        // lastn = document.getElementById("my1").value,
+        // num1 = Number(document.getElementById("my").value),
+        // num2 = Number(document.getElementById("my1").value),
+        // num3 = Number(document.getElementById("my4").value),
+        // num4 = Number(document.getElementById("my5").value),
+        // email = document.getElementById("my2").value,
+        // password = document.getElementById("my4").value,
+        // passwordconf = document.getElementById("my5").value,
+        
+    if (document.getElementById("my").validity.valueMissing) {
+        txt = "Firstname can't be blank!";
+       } 
+    else if(document.getElementById("my").validity.rangeOverflow) {
+        txt = "value can't be a number!";
+       } 
+    else { 
+        txt = "Input OK";
+        } 
+    document.getElementById("demo").innerHTML = txt;
+
+    if (document.getElementById("my1").validity.valueMissing) {
+        txt = "LastName can't be blank!";
+       } 
+    else if(document.getElementById("my1").validity.rangeOverflow) {
+        txt = "value can't be a number!";
+       } 
+    else { 
+        txt = "Input OK";
+        } 
+          document.getElementById("demo1").innerHTML = txt;
+
+    if (document.getElementById("my2").validity.valueMissing) {
+        txt = "Email can't be blank!";
+       } 
+    else if(document.getElementById("my2").validity.rangeOverflow) {
+        txt = "value can't be a number!";
+       } 
+    else { 
+        txt = "Input OK";
+        } 
+    document.getElementById("demo2").innerHTML = txt;
+    // if (lastn == null || lastn == "")
+    //     {
+    //     alert("LastName cannot be blank!");
+    //     return false;
+    //    }
+    // if(lastn == num2)
+    //   {
+    //     alert("LastName cannot be a number!");
+    //     return false;
+    //   }
+    // if (email == null || email == "")
+    //   {
+    //     alert("Email cannot be blank!");
+    //     return false;
+    //    }
+    // if (password == null || password == "")
+    //     {
+    //     alert("Password cannot be blank!");
+    //     return false;
+    //    }
+    // if(password == num3)
+    //   {
+    //     alert("Password should contain a symbol or a aplphabet!");
+    //     return false;
+    //   }
+     
+    // if (passwordconf == null || passwordconf == "")
+    //     {
+    //     alert("passwordconf cannot be blank!");
+    //     return false;
+    //    }
+    // if(passwordconf == num4)
+    //   {
+    //     alert("Password password confirmation should contain a symbol or a alphabet!");
+    //     return false;
+    //   }
+
+} 
+</script>
+
+<!-- if (document.getElementById("id1").validity.rangeOverflow) {
+        txt = "Value too large";
+    } else {
+        txt = "Input OK";
+    } 
+    document.getElementById("demo").innerHTML = txt;
+
+
+
+    if (document.getElementById("my").validity.valueMissing)
+      {
+         txt = "first_name cannot be blanked!";
+      }  else {
+        txt = "Input OK";
+    } 
+    if (document.getElementById("my").validity.rangeOverflow)
+      {
+         txt = "No fields left";
+      }  else {
+        txt = "Input OK";
+    } 
+      document.getElementById("demo").innerHTML = txt; -->

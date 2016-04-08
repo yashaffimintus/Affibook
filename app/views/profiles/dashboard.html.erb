@@ -1,11 +1,13 @@
+<h2 style="color:blue;" align="center">Welcome To Dashboard:(Home Page)</h2>
 <body style="background-color:#FBCBCB;">
- 
-<h2 style="color:blue;" align="center">Welcome To Dashboard:</h2>
-<button type="button" onclick="window.location='/users/:user_id/profiles/:id'"class="btn btn-info btn-lg pull-right">My Profile</button>
+<h2 style="color:red;">Welcome <%= current_user.first_name %></h2> 
+<ul class = list-inline>
+<%= link_to "My Profile",user_profiles_path(:user_id => current_user.id), class: "btn btn-primary btn-lg pull-right"  %>
 <button type="button" onclick="window.location='/users/myuser'"class="btn btn-success btn-lg pull-right">All User List</button>
-<button type="button" onclick="window.location='/users'"class="btn btn-primary btn-lg pull-right">My Friend List</button>
-</body>
+<button type="button" onclick="window.location='/likes'"class="btn btn-primary btn-lg pull-right">My Friend List</button>
 <button type="button" onclick="window.location='/posts'"class="btn btn-warning btn-lg pull-right">All Posts</button>
-</body>
 <button type="button" onclick="window.location='/posts/new'"class="btn btn-info btn-lg pull-right">Create New Posts</button>
 </body>
+</ul>
+<%= image_tag(current_user.avatar.url, :size => "500x300",:hspace => "300",:style => 'border-right: 2px solid #000;')%>
+

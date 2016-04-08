@@ -1,20 +1,32 @@
+<%= link_to "Home", root_path,class: "btn btn-primary btn-ms pull-right" %>
 <h1>Welcome <%= current_user.first_name %></h1>
 
-<table border= "1" style="width:70%">
-  <tr>
-    <th>FirstName</th>
-     <th>LastName</th>
-      <th>Email</th>   
-  </tr>
-   <tr>
-      <td><%= current_user.first_name %></td>
-      <td><%= current_user.last_name %></td>
-      <td><%=current_user.email %></td>
-      
-  </tr>
-</table>
-<%= link_to "Add More Details", new_user_profile_path %>
-
-
-
-<%= link_to "Back", root_path,class: "btn btn-primary btn-xs" %>
+  <table border= "1" style="width:70%">
+    <tr>
+      <th>FirstName</th>
+       <th>LastName</th>
+        <th>Email</th>   
+    </tr>
+     <tr>
+        <td><%= current_user.first_name %></td>
+        <td><%= current_user.last_name %></td>
+        <td><%= current_user.email %></td>
+        
+    </tr>
+  </table>
+  
+  <table border= "1" style="width:70%">
+      <tr>
+        <th>Address</th>
+        <th>Gender</th>
+        <th>Status</th>
+          <th>DOB</th>   
+      </tr>
+       <tr>
+          <td><%= @profile.address %></td>
+          <td><%= @profile.gender %></td>
+          <td><%= @profile.status %></td>
+          <td><%= @profile.dob %></td>
+      </tr>
+  </table>
+  <%= link_to "Back", user_profiles_path(:user_id => current_user.id),class: "btn btn-primary btn-xs" %>

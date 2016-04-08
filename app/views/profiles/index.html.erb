@@ -1,17 +1,28 @@
+<%= link_to "Edit User Profile",edit_user_registration_path,class: "btn btn-primary btn-ms pull-right" %>
+<%= link_to "Home Page", root_path,class: "btn btn-primary btn-ms pull-right" %>
 <body style="background-color:#E69B31;">
-<h1 style="color:blue;">User Profile</h1>
+<h2 style="color:blue;">User Profile</h2>
+<h3 style="color:red;">Welcome <%= current_user.first_name %></h3>
+<%= image_tag(current_user.avatar.url,:size => "260x180",:hspace => "300",:style => 'border-right: 2px solid #000;')%>
 <table border= "1" style="width:70%">
   <tr>
-    <th>Address</th>
-    <th>Gender</th>
-    <th>Status</th>
-      <th>DOB</th>   
+    <th>FirstName</th>
+     <th>LastName</th>
+      <th>Email</th>   
   </tr>
    <tr>
-      <td><%= profile.address %></td>
-      <td><%= profile.gender %></td>
-      <td><%= profile.status %></td>
-      <td><%= profile.dob %></td>
-  </tr>
+      <td><%= current_user.first_name %></td>
+      <td><%= current_user.last_name %></td>
+      <td><%=current_user.email %></td>
+    </tr>
 </table>
-<%= link_to "Add More Details", new_profile_path,class: "btn btn-primary btn-xs"%>
+<%= link_to "Add More Details", new_user_profile_path(:user_id => current_user.id),class: "btn btn-primary btn-ms"%>
+<% if current_user.profile.blank? %>
+<% flash[:notice] = " Add more details to Profile" %>
+<% else %>
+<%= link_to "View Details", user_profile_path(:id => current_user.id),class: "btn btn-primary btn-ms"%>
+<% flash[:notice] = " View added details" %>
+<% end %>
+
+
+
