@@ -7,13 +7,13 @@
 <div class="well" bgcolor = "#F5C09E" >
 <ul class = "list-inline" >
 <li><%= link_to "My Profile",user_profiles_path(:user_id => current_user.id), class: "btn btn-primary btn-lg pull-right"  %></li>
-<li><button type="button" onclick="window.location='/users/myuser'"class="btn btn-success btn-lg pull-right">All User List</button></li>
-<li><button type="button" onclick="window.location=' /relationships'"class="btn btn-danger btn-lg pull-right">Followed</button></li>
-<li><button type="button" onclick="window.location='/friendships'"class="btn btn-primary btn-lg pull-right">Friend List</button></li>
-<li><button type="button" onclick="window.location='/posts'"class="btn btn-warning btn-lg pull-right">All Posts</button></li>
+<li><button type="button" onclick="window.location='/users/myuser'"class="btn btn-success btn-lg pull-right">All User List(<%= User.all.where("id!=?", current_user.id).distinct.count() %>)</button></li>
+<li><button type="button" onclick="window.location=' /relationships'"class="btn btn-danger btn-lg pull-right">Followed(<%= current_user.relationships.distinct.count() %>)</button></li>
+<li><button type="button" onclick="window.location='/friendships'"class="btn btn-primary btn-lg pull-right">Friend List(<%= current_user.friendships.distinct.count() %>)</button></li>
+<li><button type="button" onclick="window.location='/posts'"class="btn btn-warning btn-lg pull-right">All Posts(<%= Post.distinct.count() %>)</button></li>
 <li><button type="button" onclick="window.location='/posts/new'"class="btn btn-info btn-lg pull-right">New Posts</button></li>
 <div class="well">
-<%= image_tag(current_user.avatar.url, :size => "300x250",:hspace => "400",:style => 'border-right: 2px solid #000;')%>
+<%= image_tag(current_user.avatar.url, :size => "300x250",:hspace => "400")%>
 </div>
 </body>
 </ul>

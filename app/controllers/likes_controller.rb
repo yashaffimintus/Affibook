@@ -1,6 +1,6 @@
 class LikesController < ApplicationController
   def index
-    @likes = Like.all
+    @likes = current_user.likes.all
   end 
 
   def create
@@ -9,13 +9,13 @@ class LikesController < ApplicationController
         @like.user_id = current_user.id
       if @like.save
         flash[:notice] = "Post Liked!"
-        redirect_to likes_path
+        redirect_to likes_path(:post_id => params[:post_id])
       else
         flash[:error] = "Unable to Liked the Post!"
         redirect_to root_url
       end
     rescue Exception => e
-        redirect_to likes_path
+        redirect_to likes_path(:post_id => params[:post_id])
     end
   end
 

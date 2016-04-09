@@ -4,23 +4,23 @@
       <tr>
           <th>FirstName</th>
           <th>LastName</th>
-      
-      <% @acc = current_user.friendships.map(&:friend_id) %>
-        <% unless @acc.include? current_user.id %>
+          
+      <% #@acc = current_user.friendships.all.where(params[:friend_id]) %>
+        <%# unless @acc.user_id == current_user.id %>
             <th>Accept</th>
             <th>Reject</th>
-        <%end%>
+        <%#end%>
       </tr>
           <% @friendships.each do |wel| %>
       <tr>
             <td><%= User.find(wel.friend_id).first_name %></td> 
             <td><%= User.find(wel.friend_id).last_name %></td> 
-           <% @inc = current_user.friendships.map(&:friend_id) %>
-        <% unless @inc.include? current_user.id %>
+           <%# @inc = current_user.friendships.all.where(params[:friend_id]) %>
+        <% #unless  @inc.user_id == current_user.id %>
             <td><%= link_to "Accept",friendship_path(:id => wel),method: :put %></td>
             <td><%= link_to "Decline",friendship_path(:id => wel.friend_id),method: :delete,
                  data: { confirm: 'Are you sure?' } %></td>
-        <%end%>       
+        <%#end%>       
       </tr>
     <% end %>  
   </table> 

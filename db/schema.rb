@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(version: 20160331094040) do
   create_table "likes", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "user_id"
-    t.boolean  "like"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
