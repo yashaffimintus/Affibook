@@ -1,5 +1,5 @@
 class FriendshipsController < ApplicationController
-  def index
+  def index  
   @friendships = current_user.friendships.all
   end
 
@@ -36,4 +36,5 @@ class FriendshipsController < ApplicationController
   end
 end
       
+    
     
