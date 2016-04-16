@@ -1,36 +1,36 @@
 <body style="background-color:#B3B0AF;">
 <h1>Listing of Users</h1>
- 
-<table border= "1" style="width:50%">
-  <tr>
-    <th>FirstName</th>
-     <th>LastName</th>
-     <th>Follow/Unfollow</th>
-     <th>Friend Request</th>
-</tr>
- 
-  <% @users.each do |user| %>
+<div class="CSSTableGenerator" > 
+  <table>
     <tr>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <% @foll=current_user.relationships.map(&:followed_id) %>
-        <% if @foll.include?user.id %>
-          <div id="container">
-          <td><%= button_to "unfollow",relationship_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary btn-xs" %></td>
-        <% else %>
-          <td><%= button_to "Follow",relationships_path(:followed_id => user.id), method: :post, class: "btn btn-primary btn-xs",:id => "show"%></td>
-        <%end%>
-        </div>
-        
-        <% @frnd=current_user.friendships.map(&:friend_id) %>
-        <% if @frnd.include?user.id %>
-          <td><%= button_to "unfriend",friendship_path(user), method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-primary btn-xs"%></td> 
-        <% else %> 
-          <td><%= button_to "Friend",friendships_path(:friend_id => user.id ), method: :post, class: "btn btn-primary btn-xs"%></td>
-        <% end %>
+      <th>FirstName</th>
+       <th>LastName</th>
+       <th>Follow/Unfollow</th>
+       <th>Friend Request</th>
+  </tr>
+   
+    <% @users.each do |user| %>
+      <tr>
+          <td><%= user.first_name %></td>
+          <td><%= user.last_name %></td>
+          <% @foll=current_user.relationships.map(&:followed_id) %>
+          <% if @foll.include?user.id %>
+            <td><%= button_to "unfollow",relationship_path(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary btn-xs" %></td>
+          <% else %>
+            <td><%= button_to "Follow",relationships_path(:followed_id => user.id), method: :post, class: "btn btn-primary btn-xs",:id => "show"%></td>
+          <%end%>
+          <% @frnd= Friendship.where(:friend_id => current_user.id).where(:approved => true) %>
+          <% if @frnd.map(&:user_id).include?user.id %>
+            <td><%= button_to "unfriend",friendship_path(user), method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-primary btn-xs"%></td> 
+          <% else %> 
+            <td><%= button_to "Friend",friendships_path(:friend_id => user.id ), method: :post, class: "btn btn-primary btn-xs"%></td>
+          <% end %>
 
-    </tr>
-  <% end %>
-</table>
+      </tr>
+    <% end %>
+  </table>
+</div>  
 </body>
 <%= link_to 'Back', root_url,class: "btn btn-primary btn-xs" %>
+        
+        

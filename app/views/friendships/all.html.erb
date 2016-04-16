@@ -1,0 +1,26 @@
+  <div class="CSSTableGenerator" >
+   <table>
+    <tr>
+     <th>Posts</th>
+     <th>Create Time</th>
+     <th>Comment</th>
+     <th>Like/Unlike</th>
+    </tr>
+      <% @pos = Friendship.where(:friend_id => current_user.id).where(:approved => true)%>
+      <% @posts.where(:user_id => @pos.map(&:user_id)).each do |post| %>
+      <tr>
+      <td><%= post.title %></td>
+      <td><%= post.created_at %></td>
+      <td><%= link_to 'comment', post_path(post),class: "btn btn-primary btn-xs"%></td>
+     <% if @pos == nil %>
+     <td><%= link_to 'Like',likes_path(:post_id => post.id),method: :post,class: "btn btn-primary btn-xs"%> </td>
+      <%else%>
+      <td><%= link_to "Unlike",like_path(post), method: :delete,class: "btn btn-primary btn-xs" %></td>
+      </tr>
+      <%end%>
+    <%end%>
+    </table>
+   </div> 
+    <%= link_to "Back", root_url,class: "btn btn-primary btn-xs"%>
+   
+   

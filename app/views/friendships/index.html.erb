@@ -1,32 +1,55 @@
 <body style="background-color:#F1B7BA;">
-    <h4>Friend Requests</h4>
-  <table border= "1" style="width:50%">
-      <tr>
-          <th>FirstName</th>
-          <th>LastName</th>
-          
-      <% #@acc = current_user.friendships.all.where(params[:friend_id]) %>
-        <%# unless @acc.user_id == current_user.id %>
-            <th>Accept</th>
-            <th>Reject</th>
-        <%#end%>
-      </tr>
-          <% @friendships.each do |wel| %>
-      <tr>
-            <td><%= User.find(wel.friend_id).first_name %></td> 
-            <td><%= User.find(wel.friend_id).last_name %></td> 
-           <%# @inc = current_user.friendships.all.where(params[:friend_id]) %>
-        <% #unless  @inc.user_id == current_user.id %>
-            <td><%= link_to "Accept",friendship_path(:id => wel),method: :put %></td>
-            <td><%= link_to "Decline",friendship_path(:id => wel.friend_id),method: :delete,
-                 data: { confirm: 'Are you sure?' } %></td>
-        <%#end%>       
-      </tr>
-    <% end %>  
-  </table> 
-</body>  
+   <% unless @friendships.blank? %>
+        <% @friendships.where(:approved => false).each do|wel| %>
+      
+        <h4>Friend Requests</h4>
+      <div class="CSSTableGenerator" >  
+        <table>
+          <tr>
+              <th>FirstName</th>
+              <th>LastName</th>
+              <th>Accept</th>
+              <th>Reject</th>
+          </tr> 
+             
+          <tr>   
+              <td><%= wel.user.first_name %></td> 
+              <td><%= wel.user.last_name %></td> 
+              <td><%= link_to "Accept",friendship_path(:id => wel),method: :put %></td>
+              <td><%= link_to "Decline",friendship_path(:id => wel.friend_id),method: :delete,
+                   data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+           
+        </table> 
+      </div>  
+        <%end%>
+        <%else%>
+        <%flash[:notice] = "Request sended...!"%>
+    <%end%> 
+</body>     
+    
 <%= link_to 'Back',  users_myuser_path,class: "btn btn-primary btn-xs" %>
+          
+ 
+                
+               
+ 
 
+               
+              
+              
+            
+      
+        
+        
+
+
+                  
+           
+
+        
+
+        
         
         
 

@@ -1,19 +1,30 @@
+
 <body style="background-color:#D2B7F1;">
 <h1>Followed User</h1>
-<table border= "1" style="width:50%">
-  <tr>
-     <th>FirstName</th>
-     <th>LastName</th>
-     <th>Post</th>
- </tr>
- <% @relationships.each do |hel| %>
-  <tr>
-  <td><%= User.find(hel.followed_id).first_name %></td>
-  <td><%= User.find(hel.followed_id).last_name %></td>
-  <td><%= Post.find(hel.followed_id).title %></td>
-  </tr>
-  <%end%>
-</table>
+<div class="CSSTableGenerator" >
+  <table border= "1" style="width:50%">
+    <tr>
+       <th>FirstName</th>
+       <th>LastName</th>
+       <th>Post</th>
+       <th>Like/Unlike</th>
+   </tr>
+   <% @relationships.each do |hel| %>
+    <tr>
+    <td><%= User.find(hel.followed_id).first_name %></td>
+    <td><%= User.find(hel.followed_id).last_name %></td>
+    <td><%= Post.find(hel.followed_id).title %></td>
+    <% @pos = current_user.likes.map(&:post_id).last %>
+    <%if @pos == nil %>
+    <td><%= link_to 'Like',likes_path(:post_id => hel.id),method: :post %></td>
+    <% else %>
+     <td><%= link_to 'UnLike',like_path(hel),method: :delete,data: { confirm: 'unlike a post ?'} %></td>
+     <% end %>
+     </tr>
+    
+    <%end%>
+  </table>
+</div>
 </body>
 <%= link_to 'Back',  root_path,class: "btn btn-primary btn-xs" %>
 

@@ -1,28 +1,27 @@
-<%= link_to "Home Page", root_path,class: "btn btn-primary btn-ms pull-right" %>
+  <%= link_to "Home Page", root_path,class: "btn btn-primary btn-ms pull-right" %>
+  <h1>Listing Posts</h1>
+  <div class="CSSTableGenerator" >
+    <table >
+      <tr>
+        <th>Title</th>
+        <th>Comment</th>
+        <th>Edit</th> 
+        <th>Delete</th>
 
-<h1>Listing Posts</h1>
- 
-<table border= "1" style="width:70%">
-  <tr>
-    <th>Title</th>
-    <th>Comment</th>
-    <th>Edit</th>
-    <th>Like/Unlike</th>
-  </tr>
- 
-  <% @posts.each do |post| %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= link_to 'Comment', post_path(post) %></td>
-      <td><%= link_to 'Edit', edit_post_path(post)  %></td>
-      <% @pos = current_user.likes.map(&:post_id) %>
-      <% if @pos.include?post.id %>
-          <td><%= link_to 'UnLike',like_path(post),method: :delete,data: { confirm: 'Are you sure you want to delete a post ?' } %></td>
-      <% else %>
-          <td><%= link_to 'Like',likes_path(:post_id => post.id),method: :post %></td>
-        <% end %>
+      </tr>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= post.title %></td>
+          <td><%= link_to 'Comment', post_path(post) %></td>
+          <td><%= link_to 'Edit', edit_post_path(post)%></td>
+          <td><%= link_to 'Delete', post_path(post),method: :delete,
+                 data: { confirm: 'Are you sure?' } %></td>
+       </tr>
+      <% end %>
+    </table>
+  </div>
+   <%= link_to "Back", root_url,class: "btn btn-primary btn-xs"%>
 
-    </tr>
-  <% end %>
-</table>
-<%= link_to "Back", root_url,class: "btn btn-primary btn-xs"%>
+      
+
+   

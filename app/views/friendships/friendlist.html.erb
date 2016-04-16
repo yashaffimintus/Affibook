@@ -1,0 +1,28 @@
+
+ <body style="background-color:#F1B7BA;">
+        <h4>Friends Accepted</h4>
+    <div class="CSSTableGenerator" >    
+      <table>
+          <tr>
+              <th>FirstName</th>
+              <th>LastName</th>
+              <th>Reject</th>
+          </tr> 
+              <% @frnds.where(:approved => true).each do|wel| %>
+          <tr>   
+              <td><%= wel.user.first_name %></td> 
+              <td><%= wel.user.last_name %></td> 
+              <td><%= link_to "Decline",friendship_path(:id => wel.friend_id),method: :delete,
+                   data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+           <%end%>
+      </table> 
+      </div>
+    </body>  
+    
+    
+<%= link_to 'Back',  users_myuser_path,class: "btn btn-primary btn-xs" %>
+          
+ 
+                
+ 

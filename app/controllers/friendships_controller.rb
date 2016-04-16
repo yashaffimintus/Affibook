@@ -1,20 +1,30 @@
 class FriendshipsController < ApplicationController
   def index  
-  @friendships = current_user.friendships.all
+  @friendships = Friendship.where(:friend_id => current_user.id)
   end
+
+  def all
+  @posts = Post.all
+  #@friendships = Friendship.where(:friend_id => current_user.id)
+  end
+
+  def friendlist
+    @frnds = Friendship.where(:friend_id => current_user.id)
+  end  
 
   def create
     begin
         @friendship = current_user.friendships.build(:friend_id => params[:friend_id],approved: false)
       if  @friendship.save
-        flash[:notice] = "Added friend."
-        redirect_to friendships_path(friend_id: params[:friend_id])
+        flash[:notice] = "friend request send."
+        redirect_to :back
       else
         flash[:error] = "Unable to add friend."
         redirect_to root_url
       end
     rescue Exception => e
-        redirect_to friendships_path(friend_id: params[:friend_id])
+        flash[:notice] = "friend request send."
+        redirect_to :back
     end
   end
 
@@ -32,7 +42,7 @@ class FriendshipsController < ApplicationController
     @friendship = current_user.friendships.find_by(friend_id: params[:id])
     @friendship.delete
     flash[:notice] = "Removed friendship."
-    redirect_to friendships_path
+    redirect_to :back
   end
 end
       

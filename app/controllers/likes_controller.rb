@@ -9,13 +9,14 @@ class LikesController < ApplicationController
         @like.user_id = current_user.id
       if @like.save
         flash[:notice] = "Post Liked!"
-        redirect_to likes_path(:post_id => params[:post_id])
+        redirect_to :back
       else
         flash[:error] = "Unable to Liked the Post!"
         redirect_to root_url
       end
     rescue Exception => e
-        redirect_to likes_path(:post_id => params[:post_id])
+      flash[:notice] = "Post Liked!"
+      redirect_to :back
     end
   end
 
@@ -23,7 +24,7 @@ class LikesController < ApplicationController
     @like = current_user.likes.find_by(post_id: params[:id])
     @like.delete
     flash[:notice] = "Unliked a Post!"
-    redirect_to likes_path
+    redirect_to relationships_path
   end
 end
       

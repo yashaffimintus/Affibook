@@ -1,10 +1,18 @@
-<%= link_to "Edit User Profile",edit_user_registration_path,class: "btn btn-primary btn-ms pull-right" %>
-<%= link_to "Home Page", root_path,class: "btn btn-primary btn-ms pull-right" %>
+
 <body style="background-color:#E69B31;">
-<h2 style="color:blue;">User Profile</h2>
+<div style="float: right; clear: left;"><%= image_tag(current_user.avatar.url,:size => "260x180",:class=>"img-circle")%></div>
+<div class="container">
+  <div class="panel panel-primary">
+  <div class="panel-heading" style="color:blue;" align="center",size = "">User Profile</div>
+  </div>
+  <div class="container">
+  <div class="panel panel-primary">
 <h3 style="color:red;">Welcome <%= current_user.first_name %></h3>
-<%= image_tag(current_user.avatar.url,:size => "260x180",:hspace => "300",:style => 'border-radius: 20px solid #000;',:class=>"img-circle")%>
-<table border= "1" style="width:70%">
+</div>
+<%= link_to "Edit User Profile",edit_user_registration_path,class: "btn btn-success btn-ms pull-left" %>
+<%= link_to "Home Page", root_path,class: "btn btn-danger btn-ms pull-left" %>
+<div class="CSSTableGenerator" >
+<table>
   <tr>
     <th>FirstName</th>
      <th>LastName</th>
@@ -16,6 +24,7 @@
       <td><%=current_user.email %></td>
     </tr>
 </table>
+</div>
 <%= link_to "Add More Details", new_user_profile_path(:user_id => current_user.id),class: "btn btn-primary btn-ms"%>
 <% if current_user.profile.blank? %>
 <% flash[:notice] = " Add more details to Profile" %>
